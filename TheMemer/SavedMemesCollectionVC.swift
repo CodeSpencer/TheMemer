@@ -32,9 +32,10 @@ class SavedMemesCollectionVC: UICollectionViewController {
         let dimension = (self.view.frame.size.width - (4.0 * space)) / 3.0
         flowLayout.sectionInset.left = space
         flowLayout.sectionInset.right = space
+        flowLayout.sectionInset.top = space
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension + 30)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,6 +46,7 @@ class SavedMemesCollectionVC: UICollectionViewController {
         let meme = memes[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
         cell.memeImageView.image = meme.memedImage
+        cell.label.text = meme.topText
         return cell
     }
     

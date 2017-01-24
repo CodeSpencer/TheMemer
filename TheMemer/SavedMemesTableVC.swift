@@ -7,19 +7,45 @@
 //
 
 import UIKit
+import CoreData
+import Foundation
 
-struct Meme {
-    var image: UIImage
-    var topText: String
-    var bottomText: String
-    var timeStamp: String
-    var memedImage: UIImage
+class Meme: NSManagedObject {
+    @NSManaged var image: UIImage
+    @NSManaged var topText: String
+    @NSManaged var bottomText: String
+    @NSManaged var timeStamp: Date
+    @NSManaged var memedImage: UIImage
+    
+    convenience init(image: UIImage, topText: String, bottomText: String, timeStamp: Date, memedImage: UIImage, entity: NSEntityDescription, context: NSManagedObjectContext) {
+        self.init(entity: entity, insertInto: context)
+        self.image = image
+        self.topText = topText
+        self.bottomText = bottomText
+        self.timeStamp = timeStamp
+        self.memedImage = memedImage
+    }
+    
+    func save() {
+        let employee = NSEntityDescription.insertNewObject(forEntityName: "Meme", into: managedObjectContext!) as! Meme
+        do {
+            try managedObjectContext?.save()
+        } catch {
+            print("Error saving Meme entity")
+        }
+    }
 }
 
 class SavedMemesTableVC: UITableViewController {
     
     var memes : [Meme] {
         return (UIApplication.shared.delegate as! AppDelegate).memes
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +65,7 @@ class SavedMemesTableVC: UITableViewController {
         let meme = memes[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell") as! MemeTableViewCell
         cell.memeImageView.image = meme.image
-        cell.timeStamp.text = meme.timeStamp
+        cell.timeStamp.text = meme.timeStamp.description
         cell.topTextLabel.text = meme.topText
         cell.bottomTextLabel.text = meme.bottomText
         return cell

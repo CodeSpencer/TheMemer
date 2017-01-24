@@ -45,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09D4F3FB1E36DF3F007759A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				09E1BF3F1E3631F700CBDAC1 /* TheMemer.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		09E1BF2C1E3631F700CBDAC1 = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +74,7 @@
 			children = (
 				09E1BF381E3631F700CBDAC1 /* AppDelegate.swift */,
 				09E1BF471E3631F700CBDAC1 /* Info.plist */,
-				09E1BF3F1E3631F700CBDAC1 /* TheMemer.xcdatamodeld */,
+				09D4F3FB1E36DF3F007759A3 /* Model */,
 				09E1BF5B1E3641D700CBDAC1 /* View */,
 				09E1BF571E36413700CBDAC1 /* View Controllers */,
 			);
@@ -338,6 +346,7 @@
 				09E1BF4C1E3631F700CBDAC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

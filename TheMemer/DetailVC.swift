@@ -17,6 +17,6 @@ class DetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        memeImageView.image = meme?.image
+        memeImageView.image = meme?.memedImage
     }
 }

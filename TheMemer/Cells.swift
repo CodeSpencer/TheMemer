@@ -27,4 +27,5 @@ class MemeTableViewCell: UITableViewCell {
 
 class MemeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var memeImageView: RoundedImageView!
+    @IBOutlet weak var label: UILabel!
 }
