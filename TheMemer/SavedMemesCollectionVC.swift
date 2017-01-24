@@ -20,11 +20,17 @@ class SavedMemesCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setFlowLayout()
+        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editSavedMemes))
+        tabBarController?.navigationItem.leftBarButtonItem = editButton
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView?.reloadData()
+    }
+    
+    func editSavedMemes() {
+        print("Collection")
     }
     
     func setFlowLayout() {

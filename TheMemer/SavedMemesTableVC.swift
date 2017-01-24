@@ -15,16 +15,41 @@ class SavedMemesTableVC: UITableViewController {
     var memes : [Meme] {
         return (UIApplication.shared.delegate as! AppDelegate).memes
     }
+    var appDel = UIApplication.shared.delegate as! AppDelegate
+    var editButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editSavedMemes))
+        editButton.possibleTitles = Set(["Done", "Edit"])
+        tabBarController?.navigationItem.leftBarButtonItem = editButton
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    func editSavedMemes() {
+        configureEditButton(editing: true)
+        tableView.setEditing(true, animated: true)
+    }
+    
+    func cancelEditing() {
+        configureEditButton(editing: false)
+        tableView.setEditing(false, animated: true)
+    }
+    
+    func configureEditButton(editing: Bool) {
+        if editing {
+            editButton.action = #selector(cancelEditing)
+            editButton.title = "Done"
+        } else {
+            editButton.title = "Edit"
+            editButton.action = #selector(editSavedMemes)
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,6 +77,25 @@ class SavedMemesTableVC: UITableViewController {
         detailVC.meme = memes[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
-
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return [UITableViewRowAction(style: .destructive, title: "Delete") {(action, indexPath) in
+            self.deleteMeme(meme: self.memes[indexPath.row])
+            self.appDel.memes.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }]
+    }
+    
+    func deleteMeme(meme: Meme) {
+        let context = appDel.persistentContainer.viewContext
+        context.delete(meme)
+        do {
+            try context.save()
+        } catch {
+            print("Could not save changes after delete")
+        }
+    }
 }
 
