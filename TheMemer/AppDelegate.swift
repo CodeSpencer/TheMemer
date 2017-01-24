@@ -17,8 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var memes = [Meme]()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        // Override point for customization after application launch.
+        let context = persistentContainer.viewContext
+        let request = NSFetchRequest<NSManagedObject>(entityName: "Meme")
+        do {
+            memes = try! context.fetch(request) as! [Meme]
+        }
         return true
     }
 
@@ -77,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

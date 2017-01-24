@@ -88,7 +88,11 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         actionButton.isEnabled = (meme != nil) ? true : false
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera) ? true : false
         
-        memeImageView.image = meme?.image ?? UIImage(named: "placeHolder")!
+        if let data = meme?.image {
+            memeImageView.image = UIImage(data: data as Data)!
+        } else {
+            memeImageView.image = UIImage(named: "placeHolder")!
+        }
         topTextView.text = meme?.topText ?? placeholderString
         bottomTextView.text = meme?.bottomText ?? placeholderString
         topTextView.delegate = self
@@ -115,7 +119,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { (activity, completed, items, error) in
             if  completed {
-                self.saveMeme()
+                self.save()
             }
         }
         present(activityVC, animated: true, completion: nil)
@@ -136,11 +140,38 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         return memedImage
     }
     
-    func saveMeme() {
+ 
+    func save() {
         let memedImage = generateMemedImage()
-        let meme = Meme(image: memeImageView.image!, topText: topTextView.text!, bottomText: bottomTextView.text!, timeStamp: Date(), memedImage: memedImage)
-        meme.save()
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Meme", in: managedContext)!
+        
+        let newMeme = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        if let image = UIImageJPEGRepresentation(memeImageView.image!, 0) {
+            newMeme.setValue(image as NSData, forKey: "image")
+        }
+        if let memedImage = UIImageJPEGRepresentation(memedImage, 0) {
+            newMeme.setValue(memedImage as NSData, forKey: "memedImage")
+        }
+        newMeme.setValue(topTextView.text, forKeyPath: "topText")
+        newMeme.setValue(bottomTextView.text, forKey: "bottomText")
+        newMeme.setValue(NSDate(), forKey: "timeStamp")
+
+        do {
+            try managedContext.save()
+            appDelegate.memes.append(newMeme as! Meme)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
         self.navigationController?.popViewController(animated: true)
+
     }
     
     func selectImage(_ sourceType: UIImagePickerControllerSourceType) {

@@ -10,32 +10,6 @@ import UIKit
 import CoreData
 import Foundation
 
-class Meme: NSManagedObject {
-    @NSManaged var image: UIImage
-    @NSManaged var topText: String
-    @NSManaged var bottomText: String
-    @NSManaged var timeStamp: Date
-    @NSManaged var memedImage: UIImage
-    
-    convenience init(image: UIImage, topText: String, bottomText: String, timeStamp: Date, memedImage: UIImage, entity: NSEntityDescription, context: NSManagedObjectContext) {
-        self.init(entity: entity, insertInto: context)
-        self.image = image
-        self.topText = topText
-        self.bottomText = bottomText
-        self.timeStamp = timeStamp
-        self.memedImage = memedImage
-    }
-    
-    func save() {
-        let employee = NSEntityDescription.insertNewObject(forEntityName: "Meme", into: managedObjectContext!) as! Meme
-        do {
-            try managedObjectContext?.save()
-        } catch {
-            print("Error saving Meme entity")
-        }
-    }
-}
-
 class SavedMemesTableVC: UITableViewController {
     
     var memes : [Meme] {
@@ -64,8 +38,10 @@ class SavedMemesTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let meme = memes[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell") as! MemeTableViewCell
-        cell.memeImageView.image = meme.image
-        cell.timeStamp.text = meme.timeStamp.description
+        if let data = meme.image {
+            cell.memeImageView.image = UIImage(data: data as Data)
+        }
+        cell.timeStamp.text = meme.timeStamp?.description
         cell.topTextLabel.text = meme.topText
         cell.bottomTextLabel.text = meme.bottomText
         return cell
