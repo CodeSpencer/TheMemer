@@ -16,11 +16,17 @@ class SavedMemesCollectionVC: UICollectionViewController {
     }
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    var editButton = UIBarButtonItem()
+    var editingMemes = false {
+        didSet {
+            collectionView?.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setFlowLayout()
-        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editSavedMemes))
+        editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editSavedMemes))
         tabBarController?.navigationItem.leftBarButtonItem = editButton
     }
     
@@ -30,7 +36,22 @@ class SavedMemesCollectionVC: UICollectionViewController {
     }
     
     func editSavedMemes() {
-        print("Collection")
+        configureEditButton(editing: true)
+    }
+    
+    func cancelEditing() {
+        configureEditButton(editing: false)
+    }
+    
+    func configureEditButton(editing: Bool) {
+        self.editingMemes = editing
+        if editing {
+            editButton.action = #selector(cancelEditing)
+            editButton.title = "Done"
+        } else {
+            editButton.title = "Edit"
+            editButton.action = #selector(editSavedMemes)
+        }
     }
     
     func setFlowLayout() {
@@ -56,6 +77,13 @@ class SavedMemesCollectionVC: UICollectionViewController {
         }
         cell.label.text = meme.topText
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? MemeCollectionViewCell {
+            cell.deleteButton.isHidden = !self.editingMemes
+            cell.deleteButton.isEnabled = self.editingMemes
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

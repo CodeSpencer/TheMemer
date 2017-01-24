@@ -93,6 +93,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func deleteMeme(meme: Meme) {
+        let context = persistentContainer.viewContext
+        context.delete(meme)
+        do {
+            try context.save()
+        } catch {
+            print("Could not save changes after delete")
+        }
+    }
 
 }
 

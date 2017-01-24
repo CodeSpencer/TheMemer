@@ -123,20 +123,33 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7f-IA-FFb">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="230"/>
+                                            <color key="backgroundColor" red="1" green="0.2699217203" blue="0.1057714971" alpha="0.25651939655172412" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="22"/>
+                                            <state key="normal" title="Delete">
+                                                <color key="titleColor" red="1" green="0.2699217203" blue="0.1057714971" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Q7f-IA-FFb" firstAttribute="leading" secondItem="lsp-tr-1AH" secondAttribute="leading" id="0TG-gX-gx5"/>
                                     <constraint firstAttribute="trailing" secondItem="jWu-qc-1m3" secondAttribute="trailing" id="1z4-A0-xKt"/>
                                     <constraint firstAttribute="trailing" secondItem="wcC-BM-cku" secondAttribute="trailing" constant="6" id="452-9K-DXW"/>
                                     <constraint firstAttribute="bottom" secondItem="wcC-BM-cku" secondAttribute="bottom" constant="6" id="76g-Dz-tIB"/>
+                                    <constraint firstItem="Q7f-IA-FFb" firstAttribute="top" secondItem="lsp-tr-1AH" secondAttribute="top" id="9cB-q2-6lg"/>
                                     <constraint firstItem="wcC-BM-cku" firstAttribute="leading" secondItem="lsp-tr-1AH" secondAttribute="leading" constant="6" id="QrA-E8-Q2h"/>
                                     <constraint firstItem="jWu-qc-1m3" firstAttribute="top" secondItem="lsp-tr-1AH" secondAttribute="top" id="T3K-7v-ngW"/>
                                     <constraint firstItem="jWu-qc-1m3" firstAttribute="leading" secondItem="lsp-tr-1AH" secondAttribute="leading" id="Uag-D0-TcG"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q7f-IA-FFb" secondAttribute="trailing" id="UhZ-xx-3Fi"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q7f-IA-FFb" secondAttribute="bottom" id="efY-0A-UdX"/>
                                     <constraint firstItem="wcC-BM-cku" firstAttribute="top" secondItem="jWu-qc-1m3" secondAttribute="bottom" constant="6" id="iiD-wg-NC4"/>
                                 </constraints>
                                 <size key="customSize" width="187" height="230"/>
                                 <connections>
+                                    <outlet property="deleteButton" destination="Q7f-IA-FFb" id="Vsz-4r-DcR"/>
                                     <outlet property="label" destination="wcC-BM-cku" id="g53-T8-Un0"/>
                                     <outlet property="memeImageView" destination="jWu-qc-1m3" id="V2v-yR-dGv"/>
                                 </connections>
@@ -334,6 +347,6 @@
         <image name="tableIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9jD-zD-NwZ"/>
+        <segue reference="BNW-LR-fKL"/>
     </inferredMetricsTieBreakers>
 </document>

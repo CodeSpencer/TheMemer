@@ -80,7 +80,7 @@ class SavedMemesTableVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         return [UITableViewRowAction(style: .destructive, title: "Delete") {(action, indexPath) in
-            self.deleteMeme(meme: self.memes[indexPath.row])
+            self.appDel.deleteMeme(meme: self.memes[indexPath.row])
             self.appDel.memes.remove(at: indexPath.row)
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -88,14 +88,5 @@ class SavedMemesTableVC: UITableViewController {
         }]
     }
     
-    func deleteMeme(meme: Meme) {
-        let context = appDel.persistentContainer.viewContext
-        context.delete(meme)
-        do {
-            try context.save()
-        } catch {
-            print("Could not save changes after delete")
-        }
-    }
 }
 
