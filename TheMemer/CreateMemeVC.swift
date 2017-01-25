@@ -26,6 +26,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        scrollView.contentInset = UIEdgeInsets.zero
         configureUI()
     }
     
@@ -120,8 +121,8 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         let memedImage = generateMemedImage()
         let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { (activity, completed, items, error) in
-            if  completed {
-                self.save()
+            if completed {
+                self.save(memedImage: memedImage)
             }
         }
         present(activityVC, animated: true, completion: nil)
@@ -132,7 +133,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         toolBar.isHidden = true
         
         UIGraphicsBeginImageContext(view.frame.size)
-        view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         let memedImage = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage(named: "placeHolder")!
         UIGraphicsEndImageContext()
         
@@ -143,9 +144,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
  
-    func save() {
-        let memedImage = generateMemedImage()
-
+    func save(memedImage: UIImage) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
