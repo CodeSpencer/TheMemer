@@ -12,8 +12,9 @@ import UIKit
 class SavedMemesCollectionVC: UICollectionViewController {
     
     var memes : [Meme] {
-        return (UIApplication.shared.delegate as! AppDelegate).memes
+        return appDel.memes
     }
+    let appDel = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     var editButton = UIBarButtonItem()
@@ -86,10 +87,21 @@ class SavedMemesCollectionVC: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt
+        indexPath: IndexPath) {
         let meme = memes[indexPath.item]
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
-        detailVC.meme = meme
-        navigationController?.pushViewController(detailVC, animated: true)
+        if editingMemes {
+            print("EDITING TAP")
+            appDel.deleteMeme(meme: meme)
+            appDel.memes.remove(at: indexPath.item)
+            collectionView.deleteItems(at: [indexPath])
+            if memes.isEmpty {
+                configureEditButton(editing: false)
+            }
+        } else {
+            let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
+            detailVC.meme = meme
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIScrollViewDelegate {
     
     var meme: Meme?
     
@@ -21,9 +21,11 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var actionButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.delegate = self
         configureUI()
     }
     
@@ -191,6 +193,10 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             self.actionButton.isEnabled = true
             self.memeImageView.image = image
         }
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return memeImageView
     }
 }
 

@@ -13,9 +13,10 @@ import Foundation
 class SavedMemesTableVC: UITableViewController {
     
     var memes : [Meme] {
-        return (UIApplication.shared.delegate as! AppDelegate).memes
+        return appDel.memes
     }
-    var appDel = UIApplication.shared.delegate as! AppDelegate
+    let appDel = UIApplication.shared.delegate as! AppDelegate
+    
     var editButton = UIBarButtonItem()
     
     override func viewDidLoad() {
@@ -85,6 +86,9 @@ class SavedMemesTableVC: UITableViewController {
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
+            if self.memes.isEmpty {
+                self.configureEditButton(editing: false)
+            }
         }]
     }
     
