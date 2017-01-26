@@ -132,8 +132,9 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         navigationController?.navigationBar.isHidden = true
         toolBar.isHidden = true
         
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(scrollView.frame.size)
+//        view.clearsContextBeforeDrawing = true
+        view.drawHierarchy(in: scrollView.bounds, afterScreenUpdates: true)
         let memedImage = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage(named: "placeHolder")!
         UIGraphicsEndImageContext()
         

@@ -35,22 +35,29 @@ class SavedMemesTableVC: UITableViewController {
     
     func editSavedMemes() {
         configureEditButton(editing: true)
-        tableView.setEditing(true, animated: true)
     }
     
     func cancelEditing() {
         configureEditButton(editing: false)
-        tableView.setEditing(false, animated: true)
     }
     
     func configureEditButton(editing: Bool) {
         if editing {
             editButton.action = #selector(cancelEditing)
             editButton.title = "Done"
+            tableView.setEditing(true, animated: true)
         } else {
             editButton.title = "Edit"
             editButton.action = #selector(editSavedMemes)
+            tableView.setEditing(false, animated: true)
         }
+    }
+    
+    func configureTimestamp(date: Date, desiredFormat: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = desiredFormat
+        let newDateString = formatter.string(from: date)
+        return newDateString
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -67,7 +74,7 @@ class SavedMemesTableVC: UITableViewController {
         if let data = meme.image {
             cell.memeImageView.image = UIImage(data: data as Data)
         }
-        cell.timeStamp.text = meme.timeStamp?.description
+        cell.timeStamp.text = configureTimestamp(date: meme.timeStamp as! Date, desiredFormat: "MMM dd, yyyy")
         cell.topTextLabel.text = meme.topText
         cell.bottomTextLabel.text = meme.bottomText
         return cell

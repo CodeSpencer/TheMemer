@@ -91,7 +91,6 @@ class SavedMemesCollectionVC: UICollectionViewController {
         indexPath: IndexPath) {
         let meme = memes[indexPath.item]
         if editingMemes {
-            print("EDITING TAP")
             appDel.deleteMeme(meme: meme)
             appDel.memes.remove(at: indexPath.item)
             collectionView.deleteItems(at: [indexPath])
