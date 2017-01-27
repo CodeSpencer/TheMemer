@@ -150,7 +150,7 @@
                                                 <constraint firstAttribute="width" secondItem="jWu-qc-1m3" secondAttribute="height" multiplier="1:1" id="q8U-Td-sks"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Text...." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcC-BM-cku">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timestamp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcC-BM-cku">
                                             <rect key="frame" x="6" y="193" width="175" height="31"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -398,6 +398,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xcB-HM-K5X"/>
-        <segue reference="9jD-zD-NwZ"/>
+        <segue reference="BNW-LR-fKL"/>
     </inferredMetricsTieBreakers>
 </document>

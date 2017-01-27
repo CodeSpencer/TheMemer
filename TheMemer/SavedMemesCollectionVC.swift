@@ -76,7 +76,7 @@ class SavedMemesCollectionVC: UICollectionViewController {
         if let data = meme.memedImage {
             cell.memeImageView.image = UIImage(data: data as Data)
         }
-        cell.label.text = meme.topText
+        cell.label.text = appDel.configureTimestamp(date: meme.timeStamp as! Date, desiredFormat: "MMM dd, yyyy")
         return cell
     }
     

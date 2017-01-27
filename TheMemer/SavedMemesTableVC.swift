@@ -53,13 +53,6 @@ class SavedMemesTableVC: UITableViewController {
         }
     }
     
-    func configureTimestamp(date: Date, desiredFormat: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = desiredFormat
-        let newDateString = formatter.string(from: date)
-        return newDateString
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -74,7 +67,7 @@ class SavedMemesTableVC: UITableViewController {
         if let data = meme.image {
             cell.memeImageView.image = UIImage(data: data as Data)
         }
-        cell.timeStamp.text = configureTimestamp(date: meme.timeStamp as! Date, desiredFormat: "MMM dd, yyyy")
+        cell.timeStamp.text = appDel.configureTimestamp(date: meme.timeStamp as! Date, desiredFormat: "MMM dd, yyyy")
         cell.topTextLabel.text = meme.topText
         cell.bottomTextLabel.text = meme.bottomText
         return cell

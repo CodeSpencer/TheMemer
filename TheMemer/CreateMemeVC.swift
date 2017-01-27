@@ -23,6 +23,12 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var containerView: UIView!
     
+    var attributes: [String: AnyObject] {
+        return [NSForegroundColorAttributeName: UIColor.white,
+                NSStrokeColorAttributeName: UIColor.black,
+                NSStrokeWidthAttributeName: -4.0 as AnyObject,
+                NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -98,9 +104,11 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         bottomTextView.text = meme?.bottomText ?? placeholderString
         topTextView.delegate = self
         bottomTextView.delegate = self
-        let memeTextAttributes = [NSStrokeColorAttributeName: UIColor(white: 0.0, alpha: 1.0), NSForegroundColorAttributeName: UIColor(white: 2.0, alpha: 1.0), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: NSNumber(value: -3.0 as Float)]
-        topTextView.typingAttributes = memeTextAttributes
-        bottomTextView.typingAttributes = memeTextAttributes
+//        let memeTextAttributes = [NSStrokeColorAttributeName: UIColor(white: 0.0, alpha: 1.0), NSForegroundColorAttributeName: UIColor(white: 2.0, alpha: 1.0), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: NSNumber(value: -3.0 as Float)]
+        topTextView.attributedText = NSAttributedString(string: topTextView.text, attributes: attributes)
+        bottomTextView.attributedText = NSAttributedString(string: bottomTextView.text, attributes: attributes)
+        topTextView.textAlignment = .center
+        bottomTextView.textAlignment = .center
     }
     
     @IBAction func presentCamera() {

@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var memes = [Meme]()
     
+    func configureTimestamp(date: Date, desiredFormat: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = desiredFormat
+        let newDateString = formatter.string(from: date)
+        return newDateString
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let context = persistentContainer.viewContext
         let request = NSFetchRequest<NSManagedObject>(entityName: "Meme")
