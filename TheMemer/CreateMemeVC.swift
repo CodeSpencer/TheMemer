@@ -21,12 +21,10 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var actionButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.delegate = self
-        scrollView.contentInset = UIEdgeInsets.zero
         configureUI()
     }
     
@@ -132,9 +130,9 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         navigationController?.navigationBar.isHidden = true
         toolBar.isHidden = true
         
-        UIGraphicsBeginImageContext(scrollView.frame.size)
+        UIGraphicsBeginImageContext(containerView.frame.size)
 //        view.clearsContextBeforeDrawing = true
-        view.drawHierarchy(in: scrollView.bounds, afterScreenUpdates: true)
+        containerView.drawHierarchy(in: containerView.bounds, afterScreenUpdates: true)
         let memedImage = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage(named: "placeHolder")!
         UIGraphicsEndImageContext()
         
@@ -179,6 +177,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func selectImage(_ sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = sourceType
         present(imagePicker, animated: true, completion: nil)
     }

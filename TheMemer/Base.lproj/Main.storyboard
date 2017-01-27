@@ -250,20 +250,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.5" maximumZoomScale="3" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="ozn-NB-rJB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="05R-O7-o8L">
-                                        <rect key="frame" x="0.0" y="-60" width="375" height="787"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="05R-O7-o8L" secondAttribute="trailing" id="df1-Av-G7a"/>
-                                    <constraint firstItem="05R-O7-o8L" firstAttribute="top" secondItem="ozn-NB-rJB" secondAttribute="top" constant="-60" id="dmF-xf-nvn"/>
-                                    <constraint firstAttribute="bottom" secondItem="05R-O7-o8L" secondAttribute="bottom" id="fsA-d6-sCy"/>
-                                    <constraint firstItem="05R-O7-o8L" firstAttribute="leading" secondItem="ozn-NB-rJB" secondAttribute="leading" id="xo3-xx-v7r"/>
-                                </constraints>
-                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd7-50-ufs">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
@@ -282,36 +268,53 @@
                                     <barButtonItem systemItem="flexibleSpace" id="iDX-Uc-Qwp"/>
                                 </items>
                             </toolbar>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" text="Tap To Type" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UtU-yn-u8Z">
-                                <rect key="frame" x="20" y="89" width="335" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" text="Tap To Type" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EAg-lG-0qX">
-                                <rect key="frame" x="20" y="554" width="335" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                            </textView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0t-3R-HeM">
+                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LJE-iF-lwc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" text="Tap To Type" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hse-Qc-C2f">
+                                        <rect key="frame" x="15" y="15" width="345" height="49"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" text="Tap To Type" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EAg-lG-0qX">
+                                        <rect key="frame" x="15" y="311" width="345" height="49"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="hse-Qc-C2f" firstAttribute="leading" secondItem="O0t-3R-HeM" secondAttribute="leading" constant="15" id="Apd-gn-AwL"/>
+                                    <constraint firstAttribute="bottom" secondItem="LJE-iF-lwc" secondAttribute="bottom" id="BPE-bp-8rz"/>
+                                    <constraint firstItem="hse-Qc-C2f" firstAttribute="top" secondItem="O0t-3R-HeM" secondAttribute="top" constant="15" id="G8M-e5-Vvp"/>
+                                    <constraint firstAttribute="width" secondItem="O0t-3R-HeM" secondAttribute="height" multiplier="1:1" id="LVm-sd-k7k"/>
+                                    <constraint firstAttribute="bottom" secondItem="EAg-lG-0qX" secondAttribute="bottom" constant="15" id="VCM-FU-TwG"/>
+                                    <constraint firstAttribute="bottom" secondItem="LJE-iF-lwc" secondAttribute="bottom" id="VIs-Pr-0Jh"/>
+                                    <constraint firstItem="EAg-lG-0qX" firstAttribute="leading" secondItem="O0t-3R-HeM" secondAttribute="leading" constant="15" id="VXu-Lg-LQv"/>
+                                    <constraint firstItem="LJE-iF-lwc" firstAttribute="height" secondItem="O0t-3R-HeM" secondAttribute="height" id="lhz-YB-kmM"/>
+                                    <constraint firstAttribute="trailing" secondItem="hse-Qc-C2f" secondAttribute="trailing" constant="15" id="oNV-r3-N3x"/>
+                                    <constraint firstItem="LJE-iF-lwc" firstAttribute="width" secondItem="O0t-3R-HeM" secondAttribute="width" id="of8-C7-K9S"/>
+                                    <constraint firstItem="LJE-iF-lwc" firstAttribute="leading" secondItem="O0t-3R-HeM" secondAttribute="leading" id="qz1-PX-w6m"/>
+                                    <constraint firstAttribute="trailing" secondItem="LJE-iF-lwc" secondAttribute="trailing" id="xpS-3H-nyb"/>
+                                    <constraint firstAttribute="trailing" secondItem="EAg-lG-0qX" secondAttribute="trailing" constant="15" id="yKR-4T-4KR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ozn-NB-rJB" firstAttribute="top" secondItem="G6z-MB-JEJ" secondAttribute="top" id="2eh-f8-5U7"/>
-                            <constraint firstAttribute="trailing" secondItem="EAg-lG-0qX" secondAttribute="trailing" constant="20" id="2gg-Rb-RFF"/>
                             <constraint firstItem="NZ7-tt-4vX" firstAttribute="top" secondItem="zd7-50-ufs" secondAttribute="bottom" id="8hU-si-NVi"/>
-                            <constraint firstAttribute="trailing" secondItem="UtU-yn-u8Z" secondAttribute="trailing" constant="20" id="DH8-9O-Vlt"/>
-                            <constraint firstItem="ozn-NB-rJB" firstAttribute="leading" secondItem="G6z-MB-JEJ" secondAttribute="leading" id="Jya-lX-frR"/>
-                            <constraint firstAttribute="trailing" secondItem="ozn-NB-rJB" secondAttribute="trailing" id="KH0-tw-gPB"/>
-                            <constraint firstItem="05R-O7-o8L" firstAttribute="centerY" secondItem="G6z-MB-JEJ" secondAttribute="centerY" id="Pdd-qT-hM6"/>
-                            <constraint firstItem="EAg-lG-0qX" firstAttribute="leading" secondItem="G6z-MB-JEJ" secondAttribute="leading" constant="20" id="YSi-E8-bZE"/>
-                            <constraint firstItem="UtU-yn-u8Z" firstAttribute="top" secondItem="X1O-1Q-5re" secondAttribute="bottom" constant="25" id="ai2-E8-pzq"/>
-                            <constraint firstItem="05R-O7-o8L" firstAttribute="centerX" secondItem="G6z-MB-JEJ" secondAttribute="centerX" id="g0h-Yh-zuK"/>
+                            <constraint firstItem="O0t-3R-HeM" firstAttribute="centerY" secondItem="G6z-MB-JEJ" secondAttribute="centerY" id="MO5-Vg-zda"/>
+                            <constraint firstItem="zd7-50-ufs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="O0t-3R-HeM" secondAttribute="bottom" id="X5w-Fx-8Pf"/>
+                            <constraint firstAttribute="trailing" secondItem="O0t-3R-HeM" secondAttribute="trailing" id="dwt-y8-sCA"/>
                             <constraint firstAttribute="trailing" secondItem="zd7-50-ufs" secondAttribute="trailing" id="ne6-Fh-Huk"/>
-                            <constraint firstItem="zd7-50-ufs" firstAttribute="top" secondItem="EAg-lG-0qX" secondAttribute="bottom" constant="20" id="rrL-6P-aGb"/>
-                            <constraint firstItem="NZ7-tt-4vX" firstAttribute="top" secondItem="ozn-NB-rJB" secondAttribute="bottom" id="vem-pO-9LJ"/>
+                            <constraint firstItem="O0t-3R-HeM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X1O-1Q-5re" secondAttribute="bottom" id="rQj-TW-Hb3"/>
+                            <constraint firstItem="O0t-3R-HeM" firstAttribute="leading" secondItem="G6z-MB-JEJ" secondAttribute="leading" id="rjd-Be-DhK"/>
                             <constraint firstItem="zd7-50-ufs" firstAttribute="leading" secondItem="G6z-MB-JEJ" secondAttribute="leading" id="x3x-LX-oGd"/>
-                            <constraint firstItem="UtU-yn-u8Z" firstAttribute="leading" secondItem="G6z-MB-JEJ" secondAttribute="leading" constant="20" id="zne-Fk-TTO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create Meme" id="mGj-La-7zX">
@@ -331,10 +334,10 @@
                         <outlet property="actionButton" destination="cro-IA-2aw" id="7fi-Da-WpE"/>
                         <outlet property="bottomTextView" destination="EAg-lG-0qX" id="sBR-Zr-eK8"/>
                         <outlet property="cameraButton" destination="thL-N4-jw7" id="kij-Tj-6ir"/>
-                        <outlet property="memeImageView" destination="05R-O7-o8L" id="GQc-Im-ShT"/>
-                        <outlet property="scrollView" destination="ozn-NB-rJB" id="6d8-WV-qjL"/>
+                        <outlet property="containerView" destination="O0t-3R-HeM" id="cTo-HQ-FO3"/>
+                        <outlet property="memeImageView" destination="LJE-iF-lwc" id="ldE-6z-bSf"/>
                         <outlet property="toolBar" destination="zd7-50-ufs" id="8Xn-fg-Yfa"/>
-                        <outlet property="topTextView" destination="UtU-yn-u8Z" id="v23-vm-bLx"/>
+                        <outlet property="topTextView" destination="hse-Qc-C2f" id="hZT-VJ-eIK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kO-Nk-tdf" userLabel="First Responder" sceneMemberID="firstResponder"/>
