@@ -28,4 +28,13 @@ class MemeTableViewCell: UITableViewCell {
 class MemeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var memeImageView: RoundedImageView!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        deleteButton.layer.cornerRadius = 7.0
+        deleteButton.layer.borderColor = UIColor.red.cgColor
+        deleteButton.layer.borderWidth = 2.0
+    }
+    
 }

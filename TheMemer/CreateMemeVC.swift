@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIScrollViewDelegate {
     
     var meme: Meme?
     
@@ -21,7 +21,14 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var actionButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var containerView: UIView!
     
+    var attributes: [String: AnyObject] {
+        return [NSForegroundColorAttributeName: UIColor.white,
+                NSStrokeColorAttributeName: UIColor.black,
+                NSStrokeWidthAttributeName: -4.0 as AnyObject,
+                NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!]
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -97,9 +104,11 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         bottomTextView.text = meme?.bottomText ?? placeholderString
         topTextView.delegate = self
         bottomTextView.delegate = self
-        let memeTextAttributes = [NSStrokeColorAttributeName: UIColor(white: 0.0, alpha: 1.0), NSForegroundColorAttributeName: UIColor(white: 2.0, alpha: 1.0), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: NSNumber(value: -3.0 as Float)]
-        topTextView.typingAttributes = memeTextAttributes
-        bottomTextView.typingAttributes = memeTextAttributes
+//        let memeTextAttributes = [NSStrokeColorAttributeName: UIColor(white: 0.0, alpha: 1.0), NSForegroundColorAttributeName: UIColor(white: 2.0, alpha: 1.0), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: NSNumber(value: -3.0 as Float)]
+        topTextView.attributedText = NSAttributedString(string: topTextView.text, attributes: attributes)
+        bottomTextView.attributedText = NSAttributedString(string: bottomTextView.text, attributes: attributes)
+        topTextView.textAlignment = .center
+        bottomTextView.textAlignment = .center
     }
     
     @IBAction func presentCamera() {
@@ -118,8 +127,8 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         let memedImage = generateMemedImage()
         let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { (activity, completed, items, error) in
-            if  completed {
-                self.save()
+            if completed {
+                self.save(memedImage: memedImage)
             }
         }
         present(activityVC, animated: true, completion: nil)
@@ -129,8 +138,9 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         navigationController?.navigationBar.isHidden = true
         toolBar.isHidden = true
         
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(containerView.frame.size)
+//        view.clearsContextBeforeDrawing = true
+        containerView.drawHierarchy(in: containerView.bounds, afterScreenUpdates: true)
         let memedImage = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage(named: "placeHolder")!
         UIGraphicsEndImageContext()
         
@@ -141,9 +151,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
  
-    func save() {
-        let memedImage = generateMemedImage()
-
+    func save(memedImage: UIImage) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -177,6 +185,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func selectImage(_ sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = sourceType
         present(imagePicker, animated: true, completion: nil)
     }
@@ -191,6 +200,10 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             self.actionButton.isEnabled = true
             self.memeImageView.image = image
         }
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return memeImageView
     }
 }
 
