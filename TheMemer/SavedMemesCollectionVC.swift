@@ -34,6 +34,7 @@ class SavedMemesCollectionVC: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView?.reloadData()
+        editButton.isEnabled = !memes.isEmpty
     }
     
     func editSavedMemes() {

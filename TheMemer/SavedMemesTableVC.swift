@@ -31,6 +31,7 @@ class SavedMemesTableVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        editButton.isEnabled = !memes.isEmpty
     }
     
     func editSavedMemes() {
@@ -92,5 +93,8 @@ class SavedMemesTableVC: UITableViewController {
         }]
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
